@@ -1,21 +1,18 @@
 #! /usr/bin/sudo /bin/bash
 # ---
-# RightScript Name: Nextdoor - Refresh Package Repos
-# Description: |
-#   Runs either an Apt-get update or Yum update on the package repos. If this
-#   fails, warns but does not error out. This is used so that none of our other
-#   boot scripts need to call repeated apt-get updates (unless they install
-#   some repo config, like Puppet). Should save us a few seconds on boot.
-# Inputs:
+# Updates package repositories and installs installer tools (e.g. apt-fast)
 #
-#   PACKAGE_REGION_OVERRIDE:
-#     Input Type: single
-#     Category: Nextdoor
-#     Description: >
-#       String with the region to use for the AWS-based OS package mirrors
-#     Required: false
-#     Advanced: true
-# ...
+# OS Support:
+#   - Debian
+#
+# Required environment variables:
+#   (None)
+#
+# Optional environment variables:
+#   PACKAGE_REGION_OVERRIDE: String with the region to use for the AWS-based OS
+#     package mirrors.
+#   Example: "apt:tree apt:git"
+#
 
 # http://urbanautomaton.com/blog/2014/09/09/redirecting-bash-script-output-to-syslog/
 exec 1> >(logger -s -t refresh_repos) 2>&1
